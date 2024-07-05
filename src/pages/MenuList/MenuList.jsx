@@ -22,6 +22,16 @@ export default function MenuList() {
     fetchData();
   }, []);
 
+  const diasDeLaSemana = [
+    "Lunes",
+    "Martes",
+    "Miercoles",
+    "Jueves",
+    "Viernes",
+    "Sabado",
+    "Domingo",
+  ];
+
   const handleMenuSemanal = (menuId) => {
     setMenuSeleccionado(menuId);
     setComidasFiltradas(
@@ -29,7 +39,7 @@ export default function MenuList() {
         return comida.menuId === menuId;
       })
     );
-    console.log(comidasFiltradas);
+    // console.log(comidasFiltradas);
   };
 
   return (
@@ -42,9 +52,26 @@ export default function MenuList() {
           </option>
         ))}
       </select>
-      {comidasFiltradas.map((comida) => (
-        <h2 key={comida.id}>{comida.name}</h2>
+      {diasDeLaSemana.map((dia) => (
+        <div key={dia}>
+          <h2>{dia}</h2>
+          <ul>
+            {comidasFiltradas
+              .filter((comida) => comida.day === dia)
+              .map((comida) => (
+                <li key={comida.id}>
+                  <h3>{comida.name}</h3>
+                  <p>{comida.type}</p>
+                  <p>{comida.description}</p>
+                  <img src={comida.image} alt={comida.name} width="200px" />
+                </li>
+              ))}
+          </ul>
+        </div>
       ))}
+      {/* {comidasFiltradas.map((comida) => (
+        <h2 key={comida.id}>{comida.name}</h2>
+      ))} */}
       {/* <CreateMenu /> */}
       {/* <CreateComida /> */}
     </div>
