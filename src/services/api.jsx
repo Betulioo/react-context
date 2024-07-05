@@ -13,3 +13,15 @@ export const createMenu = async (menu) => {
   const response = await axios.post(`${API_URL}/Menu`, menu);
   return response.data;
 };
+
+//funcion para obtener las comidas
+export const getComidas = async () => {
+  const response = await axios.get(`${API_URL}/comida`);
+  return response.data;
+};
+
+//funcion para crear comidas
+export const createComida = async (comida) => {
+  const response = await axios.post(`${API_URL}/comida`, comida);
+  return response.data;
+};
